@@ -1,16 +1,28 @@
 
 const baseUrl = "//api.openweathermap.org/data/2.5/weather?";
+const iconUrl = "//openweathermap.org/img/w/";
 const apiKey = "6884e265f61fb7ed0707eafd3c5d853c";
+
+const units = {imperial: "°F", metric: "°C"};
 
 // elements for showing the error
 const elError = $('#respError');
 const elShowError = $('#showError');
+
+const elShowResp = $('#resp');
 
 // element that holds the GEO result
 const elGeolocation = $('#currentLocationGeo');
 
 const elLocationName = $('#locationName');
 const elLocationInput = $('#locationInput');
+
+const elRespHead = $('#respHead');
+const elRespTemperature = $('#respTemperature');
+const elRespHumidity = $('#respHumidity');
+const elRespPressure = $('#respPressure');
+const elRespWind = $('#respWind');
+const elRespClouds = $('#respClouds');
 
 // part for defining the overlay spinner
 const opts = {
@@ -44,6 +56,7 @@ $(function () {
 
     // hide the error output
     elShowError.hide();
+    elShowResp.hide();
 
     // get the current position
     getLocation();
@@ -53,11 +66,11 @@ $(function () {
     */
    $('#load').click(function () {
       
-      // render the output in the output field
-      $('#resp').html(resp);
-
+    let location = elLocationInput.val();
+    if(location){
+        getWeatherByLocation(location);
+    }
    })
-
 
 });
 
@@ -66,6 +79,10 @@ $(function () {
  * @param {string} location 
  */
 function getWeatherByLocation(location) {
+
+    // show loading
+    showSpinner("Loading weather");
+
     const uri = baseUrl + "q=" + location;
 
     // make the API call
@@ -79,6 +96,10 @@ function getWeatherByLocation(location) {
  * @param {float} longitude 
  */
 function getWeatherByGeoCoordinates(latitude, longitude) {
+
+    // show loading
+    showSpinner("Loading weather");
+
     const uri = baseUrl + "lat=" + latitude + "&lon=" + longitude;
 
     // make the API call
@@ -93,10 +114,9 @@ function getWeatherByGeoCoordinates(latitude, longitude) {
 function getWeather(uri) {
 
     // get the unit format
-    const format = $('input[name=unitFormat]:checked', '#locationInput').val()
+    const format = $('input[name=unitFormat]:checked', '#inputForm').val()
 
     $.getJSON(uri + "&units=" + format + "&appid=" + apiKey, function (data) {
-        console.log(data);
 
         let locationName = data.name;
 
@@ -104,9 +124,22 @@ function getWeather(uri) {
         elLocationInput.val(locationName);
         elLocationName.html(locationName);
 
+        // overwrite coordinates
+        elGeolocation.html("(<strong>Lat</strong> " + data.coord.lat + " <strong>Lng</strong> " + data.coord.lon + ")");
+
+        elRespHead.html(data.main.temp + units[format] +" | " + data.weather[0].description + " | <img src='" + iconUrl + data.weather[0].icon + ".png'>");
+
+        elRespTemperature.html(data.main.temp + units[format] +" (min. " + data.main.temp_min + units[format] + " | max. " + data.main.temp_max + units[format] +")");
+        elRespHumidity.html(data.main.humidity + "%");
+        elRespPressure.html(data.main.pressure + " hPa.");
+        elRespClouds.html(data.clouds.all + "%");
+        elRespWind.html("Speed " + data.wind.speed + ((data.wind.deg) ? " Degree " + data.wind.deg : ""));
+
         // hide the loader
         hideSpinner();
     });
+
+    elShowResp.show();
 }
 
 /**
@@ -137,6 +170,9 @@ function onLocation(position) {
     
     elGeolocation.html("(<strong>Lat</strong> " + position.coords.latitude + " <strong>Lng</strong> " + position.coords.longitude + ")");
 
+    // hide the loader
+    hideSpinner();
+    
     // load the weather info
     getWeatherByGeoCoordinates(position.coords.latitude, position.coords.longitude);
     

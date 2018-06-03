@@ -60,7 +60,7 @@
       <div class="card col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6">
         <div class="card-body text-center row">
           <div class="col-12 col-md-12">
-            <form id="locationInput">
+            <form id="inputForm">
               <div class="form-row mb-2">
                 <input class="form-control" id="locationInput" type="text" placeholder="Location..">
               </div>
@@ -88,14 +88,24 @@
     <!-- / Form -->
 
     <!-- Results -->
-    <div class="row justify-content-sm-center mb-4" style="display: hidden;">
+    <div class="row justify-content-sm-center mb-4" id="resp">
       <div class="card col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6">
-        <div class="card-body text-center row">
+        <div class="card-body row">
           <div class="col">
-            <h5>Current weather for <span id="locationName"></span>.<br><small id="currentLocationGeo"></small></h5>
-            <p id="resp">
-              <span class="caption">Click generate to see the magic in action!</span>
+            <h5>Current weather for <span id="locationName"></span>.</h5>
+            
+            <p class="lead" id="respHead">
+
             </p>
+            <p class="lead">
+              <strong>Current Temperature</strong><br>&emsp;<span id="respTemperature"></span><br>
+              <strong>Humidity</strong><br>&emsp;<span id="respHumidity"></span><br>
+              <strong>Pressure</strong><br>&emsp;<span id="respPressure"></span><br>
+              <strong>Wind</strong><br>&emsp;<span id="respWind"></span><br>
+              <strong>Cloudiness</strong><br>&emsp;<span id="respClouds"></span><br>
+            </p>
+
+            <small id="currentLocationGeo"></small>
           </div>
         </div>
       </div>
