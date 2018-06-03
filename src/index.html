@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Weather Display</title>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- Meta Tags -->
+  <meta description="A simple weather display">
+  <meta name="author" content="Bert Maurau">
+  <meta name="robots" content="index, follow">
+  <meta name="revisit-after" content="3 month">
+
+  <!-- OG Tags-->
+  <meta property="og:description" content="A simple weather display." />
+  <meta property="og:url" content="https://bertmaurau.be" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://bertmaurau.be/images/bertmaurau.png" />
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Bert Maurau - Weather Display" />
+  <meta name="twitter:description" content="A simple weather display." />
+  <meta name="twitter:url" content="https://bertmaurau.be" />
+  <meta name="twitter:image" content="https://bertmaurau.be/images/bertmaurau.png" />
+
+  <!-- Dependency Stylesheets -->
+  <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="lib/loader/css/iosOverlay.css">
+
+
+  <style>
+    html,
+    body {
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Container -->
+  <div class="container align-self-center">
+
+    <!-- Header part -->
+    <div class="row justify-content-sm-center mb-4 mt-4">
+      <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6 text-center">
+        <h1 class="display-4">Weather Display</h1>
+        <hr>
+        <p class="lead">Get the current weather forecast based on your corrent location, or the location provided below.</p>
+      </div>
+    </div>
+    <!-- / Header -->
+
+    <!-- Form -->
+    <div class="row justify-content-sm-center mb-4">
+      <div class="card col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6">
+        <div class="card-body text-center row">
+          <div class="col-12 col-md-12">
+            <form id="locationInput">
+              <div class="form-row mb-2">
+                <input class="form-control" id="locationInput" type="text" placeholder="Location..">
+              </div>
+              <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    <input class="form-check-input" type="radio" name="unitFormat" id="unitImperial" value="imperial"> Imperial (Fahrenheit)
+                  </label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label">
+                    <input class="form-check-input" type="radio" name="unitFormat" checked="checked" id="untiMetric" value="metric"> Metric (Celcius)
+                  </label>
+                </div>
+            </form>
+          </div>
+          <div class="col-12 col-md-12 mt-4">
+            <button type="button" class="btn btn-block btn-primary" id="load">What's the weather like?</button>
+          </div>
+          <div class="col-12 col-md-12 mt-4 text-center">
+          <p id="showError" class="lead mt-2">Failed to get location.<br>Reason: <small id="respError"></small><br>Please provide your location manually.</p>
+        </div>
+        </div>
+      </div>
+    </div>
+    <!-- / Form -->
+
+    <!-- Results -->
+    <div class="row justify-content-sm-center mb-4" style="display: hidden;">
+      <div class="card col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6">
+        <div class="card-body text-center row">
+          <div class="col">
+            <h5>Current weather for <span id="locationName"></span>.<br><small id="currentLocationGeo"></small></h5>
+            <p id="resp">
+              <span class="caption">Click generate to see the magic in action!</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- / Results -->
+
+    <!-- Footer -->
+    <div class="row justify-content-sm-center mb-4 mt-4">
+      <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-6 text-center">
+        <hr>
+        <small>Bert Maurau 2018
+          <br>
+          <a href="https://bertmaurau.be">www.bertmaurau.be</a>
+          <br>Contact:
+          <a href="mailto:hello@bertmaurua.be">hello@bertmaurau.be</a>
+        </small>
+      </div>
+    </div>
+    <!-- / Footer-->
+
+
+  </div>
+  <!-- / Container -->
+
+  <!-- Load required dependencies -->
+  <script type="text/javascript" src="lib/jquery/jquery.v3-3-1.min.js"></script>
+  <script type="text/javascript" src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script type="text/javascript" src="lib/loader/js/iosOverlay.js"></script>
+  <script type="text/javascript" src="lib/loader/js/spin.min.js"></script>
+
+
+  <!-- Main scripts -->
+  <script type="text/javascript" src="scripts.js"></script>
+
+</body>
+
+</html>

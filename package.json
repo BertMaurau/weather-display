@@ -1,0 +1,34 @@
+{
+  "name": "weather-display",
+  "version": "1.0.0",
+  "description": "A simple weather display.",
+  "author": "Bert Maurau",
+  "license": "ISC",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bertmaurau/weather-display.git"
+  },
+  "keywords": [
+    "javascript",
+    "weather",
+    "display",
+    "bertmaurau"
+  ],
+  "bugs": {
+    "url": "https://github.com/bertmaurau/weather-display/issues"
+  },
+  "homepage": "https://bertmaurau.be/projects/weather-display",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "gen-minified": "uglifyjs ./dist/scripts.js --output ./dist/scripts.min.js",
+    "copy": "mkdirp ./dist/lib && ncp ./src/lib dist/lib && ncp ./src/index.html ./dist/index.html && ncp ./src/scripts.js ./dist/scripts.js",
+    "build": "npm run copy && npm run gen-minified"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "mkdirp": "^0.5.1",
+    "ncp": "^2.0.0",
+    "uglify-es": "^3.3.9"
+  }
+}
