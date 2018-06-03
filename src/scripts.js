@@ -3,7 +3,7 @@ const baseUrl = "//api.openweathermap.org/data/2.5/weather?";
 const iconUrl = "//openweathermap.org/img/w/";
 const apiKey = "6884e265f61fb7ed0707eafd3c5d853c";
 
-const units = {imperial: "°F", metric: "°C"};
+const units = { imperial: "°F", metric: "°C" };
 
 // elements for showing the error
 const elError = $('#respError');
@@ -61,16 +61,16 @@ $(function () {
     // get the current position
     getLocation();
 
-   /**
-    * Generate the actual result
-    */
-   $('#load').click(function () {
-      
-    let location = elLocationInput.val();
-    if(location){
-        getWeatherByLocation(location);
-    }
-   })
+    /**
+     * Generate the actual result
+     */
+    $('#load').click(function () {
+
+        let location = elLocationInput.val();
+        if (location) {
+            getWeatherByLocation(location);
+        }
+    })
 
 });
 
@@ -129,7 +129,7 @@ function getWeather(uri) {
 
         elRespHead.html(data.main.temp + units[format] + " | " + data.weather[0].description + " | <img src='" + iconUrl + data.weather[0].icon + ".png'>");
 
-        elRespTemperature.html(data.main.temp + units[format] + " (min. " + data.main.temp_min + units[format] + " | max. " + data.main.temp_max + units[format] +")");
+        elRespTemperature.html(data.main.temp + units[format] + " (min. " + data.main.temp_min + units[format] + " | max. " + data.main.temp_max + units[format] + ")");
         elRespHumidity.html(data.main.humidity + "%");
         elRespPressure.html(data.main.pressure + " hPa.");
         elRespClouds.html(data.clouds.all + "%");
@@ -140,7 +140,7 @@ function getWeather(uri) {
 
         elShowResp.show();
     });
-    
+
 }
 
 /**
@@ -168,15 +168,15 @@ function getLocation() {
  * @param {any} position 
  */
 function onLocation(position) {
-    
+
     elGeolocation.html("(<strong>Lat</strong> " + position.coords.latitude + " <strong>Lng</strong> " + position.coords.longitude + ")");
 
     // hide the loader
     hideSpinner();
-    
+
     // load the weather info
     getWeatherByGeoCoordinates(position.coords.latitude, position.coords.longitude);
-    
+
 }
 
 /**
@@ -184,7 +184,7 @@ function onLocation(position) {
  * @param {any} error 
  */
 function onError(error) {
-    switch(error.code) {
+    switch (error.code) {
         case error.PERMISSION_DENIED:
             elError.html("User denied the request for Geolocation.");
             break;
