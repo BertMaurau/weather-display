@@ -127,9 +127,9 @@ function getWeather(uri) {
         // overwrite coordinates
         elGeolocation.html("(<strong>Lat</strong> " + data.coord.lat + " <strong>Lng</strong> " + data.coord.lon + ")");
 
-        elRespHead.html(data.main.temp + units[format] +" | " + data.weather[0].description + " | <img src='" + iconUrl + data.weather[0].icon + ".png'>");
+        elRespHead.html(data.main.temp + units[format] + " | " + data.weather[0].description + " | <img src='" + iconUrl + data.weather[0].icon + ".png'>");
 
-        elRespTemperature.html(data.main.temp + units[format] +" (min. " + data.main.temp_min + units[format] + " | max. " + data.main.temp_max + units[format] +")");
+        elRespTemperature.html(data.main.temp + units[format] + " (min. " + data.main.temp_min + units[format] + " | max. " + data.main.temp_max + units[format] +")");
         elRespHumidity.html(data.main.humidity + "%");
         elRespPressure.html(data.main.pressure + " hPa.");
         elRespClouds.html(data.clouds.all + "%");
@@ -137,9 +137,10 @@ function getWeather(uri) {
 
         // hide the loader
         hideSpinner();
-    });
 
-    elShowResp.show();
+        elShowResp.show();
+    });
+    
 }
 
 /**
